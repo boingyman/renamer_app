@@ -18,3 +18,7 @@ of testing.
 #### TL:DR
 Script can rename files by importing other scripts at runtime.
 User can create their own script following a simple API.
+
+#### Note on code maintenance
+This is not dedicated project. Do not expect updates to come out on a timely
+basis, nor expect the repository owner to be available.
