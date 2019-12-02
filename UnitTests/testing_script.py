@@ -1,7 +1,7 @@
 import os
 
 
-def rename(name) -> str:
+def rename(name):
 
     (head, tail) = os.path.split(name)
 
