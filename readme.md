@@ -6,9 +6,7 @@ scripts through a dead simple API. Essentially, this allows for an easier to
 maintain library of scripts that contain solely the functionality of returning a
 new name based on the input.
 
-The API contains one requirement: the definition of the function `rename` in the
-module that accepts an input string (typically a file path) and outputs a string.
-Users are able to create their own scripts following this simple API.
+API information for creating custom scripts can be found in `API.md`.
 
 #### Requirements
 * Linux based system - Assumed incompatibility with other platforms due to lack 
