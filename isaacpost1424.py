@@ -11,14 +11,14 @@ from renaming_exceptions import *
 
 def rename(name):
 
-    search_pattern = r"(?P<path>.*/)?(?P<flavor>.*?)\s\-\s(?P<body>The\sBinding\sof\sIsaac(?:(?:\s\-\s)|(?:\:\s))" + \
-                     r"AFTERBIRTH\+.*)\s\-\s(?P<episode>Episode\s(?P<episode_number>[0-9]*))(?P<ext>\..*)?"
-    s_obj = re.search(search_pattern, name, re.I)
+    search_pattern = re.compile(r"(?P<path>.*/)?(?P<flavor>.*?)\s\-\s(?P<body>The\sBinding\sof\sIsaac(?:(?:\s\-\s)|(?:\:\s))" + \
+                                r"AFTERBIRTH\+.*)\s\-\s(?P<episode>Episode\s(?P<episode_number>[0-9]*))(?P<ext>\..*)?", re.I)
+    s_obj = re.search(search_pattern, name)
 
     result = ""
 
     if s_obj is None:
-        raise InvalidFileNameError("Given file name did not match regex pattern:\n" + search_pattern + "\n")
+        raise InvalidFileNameError("Given file name did not match regex pattern:\n" + search_pattern.pattern + "\n")
 
     result = s_obj.groupdict()['body'] + " - " + s_obj.groupdict()['episode'] + " [" + s_obj.groupdict()['flavor'] + "]"
 

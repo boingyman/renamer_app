@@ -3,12 +3,17 @@
 ##### Planned
 
 * Added feature to rename multiple individual files.
+
+#### v1.2.0 [2020-4-7]
+
 * Changed descriptions to better represent the functionality and use of the script.
 * Changes to `isaacpost1424.py`:
     * Changed descriptions to better represent the functionality and use of the 
     script.
+* Added `dcimdatetime.py`.
+* Added unit test `test_dcimdatetime`.
 
-#### v1.1.0 []
+#### v1.1.0 [2019-12-2]
 
 * Added `readme.md`.
 * Added `renaming_exceptions.py`.
