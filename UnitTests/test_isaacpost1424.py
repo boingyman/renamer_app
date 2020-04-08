@@ -4,7 +4,7 @@ from renaming_exceptions import *
 
 
 class TestRename(TestCase):
-    def test_rename1(self): # Test expected input.
+    def test_rename1_essential(self): # Test expected input.
         testString = "Some Flavor - The Binding of Isaac - AFTERBIRTH+ - Northernlion Plays - Episode 5000"
         expectedString = "The Binding of Isaac - AFTERBIRTH+ - Northernlion Plays - Episode 5000 [Some Flavor]"
 
@@ -12,7 +12,7 @@ class TestRename(TestCase):
 
         self.assertEqual(result, expectedString)
 
-    def test_rename2(self):  # Test variation of expected input.
+    def test_rename2_essential(self):  # Test variation of expected input.
         testString = "Some Flavor - The Binding of Isaac: AFTERBIRTH+ - Northernlion Plays - Episode 5000"
         expectedString = "The Binding of Isaac: AFTERBIRTH+ - Northernlion Plays - Episode 5000 [Some Flavor]"
 
@@ -34,6 +34,3 @@ class TestRename(TestCase):
         testInput = 23
 
         self.assertRaises(Exception, isaacpost1424.rename, testInput)
-
-    def test_rename6(self):  # Test returning same path.
-        pass
