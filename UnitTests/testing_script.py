@@ -1,4 +1,3 @@
-import os
 import re
 from renaming_exceptions import *
 
@@ -6,8 +5,6 @@ from renaming_exceptions import *
 def rename(name):
     search_pattern = re.compile(r"(?P<path>.*/)?(?P<name>Correct\sTest\sName)(?P<num>\d*)(?P<ext>\.txt)?")
     s_obj = re.search(search_pattern, name)
-
-    result = ""
 
     if s_obj is None:
         raise InvalidFileNameError("Given file name did not match regex pattern:\n" + search_pattern.pattern + "\n")

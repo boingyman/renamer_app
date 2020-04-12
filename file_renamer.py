@@ -1,5 +1,5 @@
 """
-Renames given files, or files inside given directories, using a .py script.
+Renames given files, or files inside given directories, using a .py script given as a string argument.
 """
 import os
 import argparse
@@ -20,10 +20,13 @@ def run(scriptPath, filePaths, pathsAreDirectories=False, isPrinting=False):
             except InvalidFileNameError as err:
                 next
 
+    # Load the script module from a given path
     scriptPath = os.path.abspath(scriptPath)
-    script_module = importlib.machinery.SourceFileLoader(scriptPath.rsplit('/', 1)[1].rsplit('.', 1)[0], scriptPath).load_module()
+    script_module = importlib.machinery.SourceFileLoader(scriptPath.rsplit('/', 1)[1].rsplit('.', 1)[0],
+                                                         scriptPath).load_module()
 
     if pathsAreDirectories:
+        # Make a list of files from all directories
         files = []
         for dir in filePaths:
             if not os.path.isdir(dir):
