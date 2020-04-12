@@ -7,7 +7,7 @@
 * Added flag `-v` and `--verbose` for debugging.
 * Made the script API more unified to the main application.
 
-#### v2.0.1 [2020-4-x]
+#### v2.0.1 [2020-4-12]
 
 * Minor changes to various files.
     * `file_renamer.py`:
