@@ -11,7 +11,7 @@ API information for creating custom scripts can be found in `API.md`.
 #### Requirements
 * Linux based system - Assumed incompatibility with other platforms due to lack 
 of testing.
-* Python 3.6+
+* Python 3.7+
 
 #### TL:DR
 Script can rename files by importing other scripts at runtime.
