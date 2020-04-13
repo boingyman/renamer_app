@@ -6,6 +6,11 @@ import argparse
 import importlib.machinery
 from renaming_exceptions import *
 
+verbosity = 0
+
+def verbose_print(requiredVerbosityLevel, message):
+    if verbosity >= requiredVerbosityLevel:
+        print(message)
 
 def run(scriptPath, filePaths, pathsAreDirectories=False, isPrinting=False):
     def do_rename(fileList):
@@ -52,10 +57,19 @@ if __name__ == '__main__':
     parsr = argparse.ArgumentParser(description="Surrogate program for renaming files.")
     parsr.add_argument("-p", "--print", action='store_true',
                        help="print the results instead of renaming files")
+    parsr.add_argument("-v", "--verbose", action='count', default=0,
+                       help="enables debug information")
     parsr.add_argument("-d", "--directories", action='store_true',
                        help="indicates that the given target paths are to directories instead of specific files")
     parsr.add_argument("files", action='store', nargs=argparse.REMAINDER,
                        help="the script and target files/folders; script will always be given first")
     args = vars(parsr.parse_args())
+
+    verbosity = 3#args['verbose']
+
+    verbose_print(2, "---file_renamer.py---\n" +
+                     "*Argument values:*\n" +
+                     ''.join([str(a) + " :: " + str(args[a]) + "\n" for a in args]) +
+                     "\nRunning main program...")
 
     run(args['files'][0], args['files'][1::], args['directories'], args['print'])
