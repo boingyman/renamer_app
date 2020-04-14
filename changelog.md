@@ -4,8 +4,11 @@
 
 * Added ability to use multiple script files.
 * Added ability to recursively go through subdirectories of given directories.
-* Added flag `-v` and `--verbose` for debugging.
 * Made the script API more unified to the main application.
+
+#### v2.1.0 [2020-4-14]
+
+* Added flag `-v` and `--verbose` for more detailed output.
 
 #### v2.0.1 [2020-4-12]
 
