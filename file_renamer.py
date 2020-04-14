@@ -73,7 +73,7 @@ if __name__ == '__main__':
                        help="the script and target files/folders; script will always be given first")
     args = vars(parsr.parse_args())
 
-    verbosity = 1#args['verbose']
+    verbosity = args['verbose']
 
     verbose_print(2, "---file_renamer.py---\n" +
                      "*Argument values:*\n" +
