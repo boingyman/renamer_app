@@ -14,39 +14,47 @@ def verbose_print(requiredVerbosityLevel, message):
 
 def run(scriptPath, filePaths, pathsAreDirectories=False, isPrinting=False):
     def do_rename(fileList):
+        verbose_print(2, "Starting renaming of files...")
         for file in fileList:
             if not os.path.isfile(file):
                 next
-            try:
-                if isPrinting:
-                    print(script_module.rename(file))
-                else:
+
+            verbose_print(3, file + "  ->  " + script_module.rename(file))
+            if isPrinting:
+                print(script_module.rename(file))
+            else:
+                try:
                     os.rename(file, script_module.rename(file))
-            except InvalidFileNameError as err:
-                next
+                except InvalidFileNameError as err:
+                    verbose_print(1, "File `" + file + "` did not match expected file format. File has been skipped.")
+                    next
+                except:
+                    next
 
     # Load the script module from a given path
     scriptPath = os.path.abspath(scriptPath)
+    verbose_print(2, "Loading script from path: " + scriptPath)
     script_module = importlib.machinery.SourceFileLoader(scriptPath.rsplit('/', 1)[1].rsplit('.', 1)[0],
                                                          scriptPath).load_module()
 
     if pathsAreDirectories:
+
         # Make a list of files from all directories
         files = []
         for dir in filePaths:
+            verbose_print(1, "Starting search in directory: " + dir)
             if not os.path.isdir(dir):
                 next
 
             filesInDirectory = []
             for f in os.listdir(dir):
                 if os.path.isfile(os.path.join(dir, f)):
+                    verbose_print(3, "Located file: " + f)
                     filesInDirectory.append(f)
 
-            if len(filesInDirectory) == 0:
-                print("Directory `" + dir + "`" + "does not contain any files, skipping...")
-            else:
-                for f in filesInDirectory:
-                    files.append(os.path.join(dir, f))
+            verbose_print(1, "Found " + str(len(filesInDirectory)) + " files in directory.")
+
+            files.extend(os.path.join(dir, f) for f in filesInDirectory)
 
         do_rename(files)
     else:
@@ -65,7 +73,7 @@ if __name__ == '__main__':
                        help="the script and target files/folders; script will always be given first")
     args = vars(parsr.parse_args())
 
-    verbosity = 3#args['verbose']
+    verbosity = 1#args['verbose']
 
     verbose_print(2, "---file_renamer.py---\n" +
                      "*Argument values:*\n" +
@@ -73,3 +81,5 @@ if __name__ == '__main__':
                      "\nRunning main program...")
 
     run(args['files'][0], args['files'][1::], args['directories'], args['print'])
+
+    verbose_print(2, "Execution has finished.")
