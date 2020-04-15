@@ -12,8 +12,7 @@ import re
 
 def rename(name):
     search_info = re.compile(r"(?P<path>.*/)?(?P<prefixtext>.*)(?P<year>\d{4})(?P<month>\d{2})(?P<day>\d{2})_" +
-                             r"(?P<hours>\d{2})(?P<minutes>\d{2})(?P<seconds>\d{2})(?P<extra>.*)(?P<ext>\..*)?",
-                                re.I)
+                             r"(?P<hours>\d{2})(?P<minutes>\d{2})(?P<seconds>\d{2})(?P<extra>.*)(?P<ext>\..*)?", re.I)
     s_obj = re.search(search_info, name)
 
     if s_obj is None:
