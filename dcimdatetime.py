@@ -19,9 +19,9 @@ def rename(name):
         return search_info.pattern, None
 
     result = (s_obj.groupdict()['path'] if not s_obj.groupdict()['path'] is None else "") + \
-             s_obj.groupdict()['prefixtext'] + s_obj.groupdict()['year'] + " " + s_obj.groupdict()['month'] + " " + \
-             s_obj.groupdict()['day'] + " - " + s_obj.groupdict()['hours'] + "_" + s_obj.groupdict()['minutes'] + \
-             "_" + s_obj.groupdict()['seconds'] + s_obj.groupdict()['extra'] + \
-             (s_obj.groupdict()['ext'] if not s_obj.groupdict()['ext'] is None else "")
+              s_obj.groupdict()['prefixtext'] + s_obj.groupdict()['year'] + " " + s_obj.groupdict()['month'] + " " + \
+              s_obj.groupdict()['day'] + " - " + s_obj.groupdict()['hours'] + "_" + s_obj.groupdict()['minutes'] + \
+              "_" + s_obj.groupdict()['seconds'] + s_obj.groupdict()['extra'] + \
+              (s_obj.groupdict()['ext'] if not s_obj.groupdict()['ext'] is None else "")
 
     return search_info.pattern, result
