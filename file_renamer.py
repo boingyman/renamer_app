@@ -43,20 +43,20 @@ def run(scriptPath, filePaths, pathsAreDirectories=False, isPrinting=False):
 
         # Make a list of files from all directories
         files = []
-        for dir in filePaths:
-            verbose_print(1, "Starting search in directory: " + dir)
-            if not os.path.isdir(dir):
+        for direc in filePaths:
+            verbose_print(1, "Starting search in directory: " + direc)
+            if not os.path.isdir(direc):
                 next
 
             filesInDirectory = []
-            for f in os.listdir(dir):
-                if os.path.isfile(os.path.join(dir, f)):
+            for f in os.listdir(direc):
+                if os.path.isfile(os.path.join(direc, f)):
                     verbose_print(3, "Located file: " + f)
                     filesInDirectory.append(f)
 
             verbose_print(1, "Found " + str(len(filesInDirectory)) + " files in directory.")
 
-            files.extend(os.path.join(dir, f) for f in filesInDirectory)
+            files.extend(os.path.join(direc, f) for f in filesInDirectory)
 
         do_rename(files)
     else:
