@@ -9,7 +9,8 @@
 #### v3.0.0 [2020-4-14]
 
 * Changed API for script files.
-    * `rename(`
+    * Information can be found in `API.md`.
+* 
 
 #### v2.1.0 [2020-4-14]
 
