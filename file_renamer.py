@@ -4,7 +4,6 @@ Renames given files, or files inside given directories, using a .py script given
 import os
 import argparse
 import importlib.machinery
-from renaming_exceptions import *
 
 verbosity = 0
 
@@ -19,15 +18,18 @@ def run(scriptPath, filePaths, pathsAreDirectories=False, isPrinting=False):
             if not os.path.isfile(file):
                 next
 
-            verbose_print(3, file + "  ->  " + script_module.rename(file))
+            (pattern, result) = script_module.rename(file)
+
+            if result is None:
+                verbose_print(1, "File `" + file + "` did not match expected file name format `" + pattern +
+                                 "`. File has been skipped.")
+
+            verbose_print(3, file + "  ->  " + result)
             if isPrinting:
-                print(script_module.rename(file))
+                print(result)
             else:
                 try:
-                    os.rename(file, script_module.rename(file))
-                except InvalidFileNameError as err:
-                    verbose_print(1, "File `" + file + "` did not match expected file format. File has been skipped.")
-                    next
+                    os.rename(file, result)
                 except:
                     next
 

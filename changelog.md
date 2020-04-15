@@ -6,6 +6,11 @@
 * Added ability to recursively go through subdirectories of given directories.
 * Made the script API more unified to the main application.
 
+#### v3.0.0 [2020-4-14]
+
+* Changed API for script files.
+    * `rename(`
+
 #### v2.1.0 [2020-4-14]
 
 * Added flag `-v` and `--verbose` for more detailed output.

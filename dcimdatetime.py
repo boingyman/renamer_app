@@ -8,28 +8,21 @@ FORMAT OUT: {Year} {Month} {Day} - {Hours}_{Minutes}_{Seconds}{Left Over Text}
 """
 
 import re
-from renaming_exceptions import *
 
 
 def rename(name):
-    search_pattern = re.compile(r"(?P<path>.*/)?(?P<prefixtext>.*)(?P<year>\d{4})(?P<month>\d{2})(?P<day>\d{2})_" +
-                                r"(?P<hours>\d{2})(?P<minutes>\d{2})(?P<seconds>\d{2})(?P<extra>.*)(?P<ext>\..*)?",
+    search_info = re.compile(r"(?P<path>.*/)?(?P<prefixtext>.*)(?P<year>\d{4})(?P<month>\d{2})(?P<day>\d{2})_" +
+                             r"(?P<hours>\d{2})(?P<minutes>\d{2})(?P<seconds>\d{2})(?P<extra>.*)(?P<ext>\..*)?",
                                 re.I)
-    s_obj = re.search(search_pattern, name)
+    s_obj = re.search(search_info, name)
 
     if s_obj is None:
-        raise InvalidFileNameError("Given file name did not match regex pattern:\n" + search_pattern.pattern + "\n")
+        return search_info.pattern, None
 
-    result = s_obj.groupdict()['prefixtext'] + s_obj.groupdict()['year'] + " " + s_obj.groupdict()['month'] + " " + \
+    result = (s_obj.groupdict()['path'] if not s_obj.groupdict()['path'] is None else "") + \
+             s_obj.groupdict()['prefixtext'] + s_obj.groupdict()['year'] + " " + s_obj.groupdict()['month'] + " " + \
              s_obj.groupdict()['day'] + " - " + s_obj.groupdict()['hours'] + "_" + s_obj.groupdict()['minutes'] + \
-             "_" + s_obj.groupdict()['seconds'] + s_obj.groupdict()['extra']
+             "_" + s_obj.groupdict()['seconds'] + s_obj.groupdict()['extra'] + \
+             (s_obj.groupdict()['ext'] if not s_obj.groupdict()['ext'] is None else "")
 
-    # Checks for 'ext' capture group, as it is the file extension, if it exists.
-    if not s_obj.groupdict()['ext'] is None:
-        result = result + s_obj.groupdict()['ext']
-
-    # Checks for 'path' capture group, as it is the path to the file, if it exists.
-    if not s_obj.groupdict()['path'] is None:
-        result = s_obj.groupdict()['path'] + result
-
-    return result
+    return search_info.pattern, result

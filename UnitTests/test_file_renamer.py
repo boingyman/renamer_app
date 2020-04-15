@@ -116,7 +116,7 @@ class TestFileRenamer(TestCase):
         for p in filePaths:
             os.fdopen(os.open(p, os.O_CREAT)).close()
 
-        command = "python3 " + os.path.abspath('../file_renamer.py') + " -d " + os.path.abspath('./testing_script.py') + \
+        command = "python3 " + os.path.abspath('../file_renamer.py') + " -vvv -d " + os.path.abspath('./testing_script.py') + \
                   " \"" + folderPath1 + "\" " + folderPath2
 
         os.system(command)

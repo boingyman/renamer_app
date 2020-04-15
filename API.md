@@ -21,11 +21,8 @@ found in the script given by `scriptPath`.
 ##### {scriptname}.rename(name)
 
 Arguments:
-* `name` - The given name or path.
+* `name` - The given name or path to the file.
 
-Method returns a string that is the modified result of `name`. If `name` is a file path, the
-method must return the given directory and given extension as well.
-
-The following exceptions should be thrown if invalid input is given:
-* `InvalidFileNameError` - Occurs when the given `name` argument is determined to be invalid
-and cannot be renamed.
+Method returns a tuple containing the search pattern used and the renaming result. If the
+name does not match with the search pattern, the tuple will return a `None` object instead
+of the result.
