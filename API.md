@@ -13,8 +13,8 @@ directories as opposed to files.
 rename the given file(s).
 
 Method does not return a result. Depending on `isPrinting`, the method will either print to
-stdout or rename the given file(s) in `filePaths`, both based on the `rename(name)` function
-found in the script given by `scriptPath`.
+stdout or rename the given file(s) in `filePaths`, which is based on the `rename(name)` 
+function found in the script given to `scriptPath`.
 
 ---
 
@@ -25,4 +25,4 @@ Arguments:
 
 Method returns a tuple containing the search pattern used and the renaming result. If the
 name does not match with the search pattern, the tuple will return a `None` object instead
-of the result.
+of the result. Method must never raise an exception.
