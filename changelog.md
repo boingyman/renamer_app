@@ -5,11 +5,11 @@
 * Added ability to use multiple script files.
 * Added ability to recursively go through subdirectories of given directories.
 
-#### v3.0.0 [2020-4-14]
+#### v3.0.0 [2020-4-15]
 
 * Changed API for script files.
     * Information can be found in `API.md`.
-* Made 
+* Renaming error handling is now exclusively in `file_renamer.py`.
 
 #### v2.1.0 [2020-4-14]
 

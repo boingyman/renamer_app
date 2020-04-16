@@ -5,8 +5,8 @@
 (found in `file_renamer.py`)
 
 Arguments:
-* `scriptPath` - The Path to the script that the application will import.<br>
-* `filePaths` - An array of strings that each represents a path to a target file.<br>
+* `scriptPath` - The Path to the script that the application will import.
+* `filePaths` - An array of strings that each represents a path to a target file.
 * `pathsAreDirectories` - Indicates whether the given file paths should be treated as
 directories as opposed to files.
 * `isPrinting` - Indicates whether the program should output the result to stdout or 
@@ -25,4 +25,5 @@ Arguments:
 
 Method returns a tuple containing the search pattern used and the renaming result. If the
 name does not match with the search pattern, the tuple will return a `None` object instead
-of the result. Method must never raise an exception.
+of the result. Method must never raise an exception. It does not matter how the function
+determines a matching naming format or how it renames. 
