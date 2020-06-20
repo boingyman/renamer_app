@@ -23,6 +23,7 @@ def run(scriptPath, filePaths, pathsAreDirectories=False, isPrinting=False):
             if result is None:
                 verbose_print(1, "File `" + file + "` did not match expected file name format `" + pattern +
                                  "`. File has been skipped.")
+                next
 
             verbose_print(3, file + "  ->  " + result)
             if isPrinting:
