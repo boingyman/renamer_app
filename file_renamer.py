@@ -5,7 +5,7 @@ import os
 import argparse
 import importlib.machinery
 
-verbosity = 0
+verbosity = 3
 
 def verbose_print(requiredVerbosityLevel, message):
     if verbosity >= requiredVerbosityLevel:
@@ -16,14 +16,14 @@ def run(scriptPath, filePaths, pathsAreDirectories=False, isPrinting=False):
         verbose_print(2, "Starting renaming of files...")
         for file in fileList:
             if not os.path.isfile(file):
-                next
+                continue
 
             (pattern, result) = script_module.rename(file)
 
             if result is None:
                 verbose_print(1, "File `" + file + "` did not match expected file name format `" + pattern +
                                  "`. File has been skipped.")
-                next
+                continue
 
             verbose_print(3, file + "  ->  " + result)
             if isPrinting:
@@ -32,7 +32,7 @@ def run(scriptPath, filePaths, pathsAreDirectories=False, isPrinting=False):
                 try:
                     os.rename(file, result)
                 except:
-                    next
+                    continue
 
     # Load the script module from a given path
     scriptPath = os.path.abspath(scriptPath)
@@ -47,7 +47,7 @@ def run(scriptPath, filePaths, pathsAreDirectories=False, isPrinting=False):
         for direc in filePaths:
             verbose_print(1, "Starting search in directory: " + direc)
             if not os.path.isdir(direc):
-                next
+                continue
 
             filesInDirectory = []
             for f in os.listdir(direc):

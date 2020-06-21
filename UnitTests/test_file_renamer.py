@@ -11,11 +11,11 @@ class TestFileRenamer(TestCase):
         temp = sys.stdout  # In unit tests, stdout is an object that does not have the method 'getvalue()'.
         sys.stdout = output
 
-        file_renamer.run('./testing_script.py', ["Correct Test Name.txt"], isPrinting=True)
+        file_renamer.run('./testing_script.py', ["Correct Test Name1.txt"], isPrinting=True)
 
         sys.stdout = temp  # Reassign the old stdout object instead of 'sys.__stdout__'.
 
-        self.assertEqual("Resulting Name.txt\n", output.getvalue())
+        self.assertEqual("Resulting Name1.txt", output.getvalue())
 
     def test_run2_essential(self):
         filePath = os.path.abspath('./Correct Test Name.txt')
@@ -133,6 +133,40 @@ class TestFileRenamer(TestCase):
         os.remove(os.path.join(folderPath2, "Resulting Name3.txt"))
         os.removedirs(folderPath2)
         os.remove(os.path.join(folderPath1, "Resulting Name1.txt"))
+        os.remove(os.path.join(folderPath1, "Resulting Name2.txt"))
+        os.remove(os.path.join(folderPath1, "Resulting Name3.txt"))
+        os.removedirs(folderPath1)
+
+    def test_run7_essential(self): # Files that do not match
+        folderPath1 = os.path.abspath('./A')
+        folderPath2 = os.path.abspath('./A/B')
+        filePaths = [os.path.abspath('./A/Incorrect Test Name1.txt'),
+                     os.path.abspath('./A/Correct Test Name2.txt'),
+                     os.path.abspath('./A/Correct Test Name3.txt'),
+                     os.path.abspath('./A/B/Correct Test Name1.txt'),
+                     os.path.abspath('./A/B/Incorrect Test Name2.txt'),
+                     os.path.abspath('./A/B/Correct Test Name3.txt')]
+
+        os.makedirs(folderPath1)
+        os.makedirs(folderPath2)
+        for p in filePaths:
+            os.fdopen(os.open(p, os.O_CREAT)).close()
+
+        file_renamer.run('./testing_script.py', [folderPath1, folderPath2],
+                         pathsAreDirectories=True)
+
+        # self.assertEqual(os.path.isfile(os.path.join(folderPath1, "Resulting Name1.txt")), True)
+        self.assertEqual(os.path.isfile(os.path.join(folderPath1, "Resulting Name2.txt")), True)
+        self.assertEqual(os.path.isfile(os.path.join(folderPath1, "Resulting Name3.txt")), True)
+        self.assertEqual(os.path.isfile(os.path.join(folderPath2, "Resulting Name1.txt")), True)
+        # self.assertEqual(os.path.isfile(os.path.join(folderPath2, "Resulting Name2.txt")), True)
+        self.assertEqual(os.path.isfile(os.path.join(folderPath2, "Resulting Name3.txt")), True)
+
+        os.remove(os.path.join(folderPath2, "Resulting Name1.txt"))
+        os.remove(os.path.join(folderPath2, "Incorrect Test Name2.txt"))
+        os.remove(os.path.join(folderPath2, "Resulting Name3.txt"))
+        os.removedirs(folderPath2)
+        os.remove(os.path.join(folderPath1, "Incorrect Test Name1.txt"))
         os.remove(os.path.join(folderPath1, "Resulting Name2.txt"))
         os.remove(os.path.join(folderPath1, "Resulting Name3.txt"))
         os.removedirs(folderPath1)
