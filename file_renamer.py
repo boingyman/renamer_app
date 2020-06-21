@@ -5,7 +5,7 @@ import os
 import argparse
 import importlib.machinery
 
-verbosity = 3
+verbosity = 0
 
 def verbose_print(requiredVerbosityLevel, message):
     if verbosity >= requiredVerbosityLevel:
