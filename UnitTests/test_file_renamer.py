@@ -155,11 +155,11 @@ class TestFileRenamer(TestCase):
         file_renamer.run('./testing_script.py', [folderPath1, folderPath2],
                          pathsAreDirectories=True)
 
-        # self.assertEqual(os.path.isfile(os.path.join(folderPath1, "Resulting Name1.txt")), True)
+        self.assertEqual(os.path.isfile(os.path.join(folderPath1, "Incorrect Test Name1.txt")), True)
         self.assertEqual(os.path.isfile(os.path.join(folderPath1, "Resulting Name2.txt")), True)
         self.assertEqual(os.path.isfile(os.path.join(folderPath1, "Resulting Name3.txt")), True)
         self.assertEqual(os.path.isfile(os.path.join(folderPath2, "Resulting Name1.txt")), True)
-        # self.assertEqual(os.path.isfile(os.path.join(folderPath2, "Resulting Name2.txt")), True)
+        self.assertEqual(os.path.isfile(os.path.join(folderPath2, "Incorrect Test Name2.txt")), True)
         self.assertEqual(os.path.isfile(os.path.join(folderPath2, "Resulting Name3.txt")), True)
 
         os.remove(os.path.join(folderPath2, "Resulting Name1.txt"))
@@ -169,4 +169,40 @@ class TestFileRenamer(TestCase):
         os.remove(os.path.join(folderPath1, "Incorrect Test Name1.txt"))
         os.remove(os.path.join(folderPath1, "Resulting Name2.txt"))
         os.remove(os.path.join(folderPath1, "Resulting Name3.txt"))
+        os.removedirs(folderPath1)
+
+    def test_run8_essential(self): # Run as if ran through command line, but only print output
+        folderPath1 = os.path.abspath('./A')
+        folderPath2 = os.path.abspath('./A/B')
+        filePaths = [os.path.abspath('./A/Correct Test Name1.txt'),
+                     os.path.abspath('./A/Correct Test Name2.txt'),
+                     os.path.abspath('./A/Correct Test Name3.txt'),
+                     os.path.abspath('./A/B/Correct Test Name1.txt'),
+                     os.path.abspath('./A/B/Correct Test Name2.txt'),
+                     os.path.abspath('./A/B/Correct Test Name3.txt')]
+
+        os.makedirs(folderPath1)
+        os.makedirs(folderPath2)
+        for p in filePaths:
+            os.fdopen(os.open(p, os.O_CREAT)).close()
+
+        command = "python3 " + os.path.abspath('../file_renamer.py') + " -p -vvv -d " + os.path.abspath('./testing_script.py') + \
+                  " \"" + folderPath1 + "\" " + folderPath2
+
+        os.system(command)
+
+        self.assertEqual(os.path.isfile(os.path.join(folderPath1, "Correct Test Name1.txt")), True)
+        self.assertEqual(os.path.isfile(os.path.join(folderPath1, "Correct Test Name2.txt")), True)
+        self.assertEqual(os.path.isfile(os.path.join(folderPath1, "Correct Test Name3.txt")), True)
+        self.assertEqual(os.path.isfile(os.path.join(folderPath2, "Correct Test Name1.txt")), True)
+        self.assertEqual(os.path.isfile(os.path.join(folderPath2, "Correct Test Name2.txt")), True)
+        self.assertEqual(os.path.isfile(os.path.join(folderPath2, "Correct Test Name3.txt")), True)
+
+        os.remove(os.path.join(folderPath2, "Correct Test Name1.txt"))
+        os.remove(os.path.join(folderPath2, "Correct Test Name2.txt"))
+        os.remove(os.path.join(folderPath2, "Correct Test Name3.txt"))
+        os.removedirs(folderPath2)
+        os.remove(os.path.join(folderPath1, "Correct Test Name1.txt"))
+        os.remove(os.path.join(folderPath1, "Correct Test Name2.txt"))
+        os.remove(os.path.join(folderPath1, "Correct Test Name3.txt"))
         os.removedirs(folderPath1)

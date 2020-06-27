@@ -1,7 +1,7 @@
 """
 Renaming script for the Northernlion video series "The Binding of Isaac: AFTERBIRTH+ - Northernlion Plays"
 
-FORMAT IN: {Flavor Text} - The Binding of Isaac{':' or ' - '} AFTERBIRTH+ - Northernlion Plays - Episode {Number}
+FORMAT IN: {Flavor Text} - The Binding of Isaac{': ' or ' - '}AFTERBIRTH+ - Northernlion Plays - Episode {Number}
 FORMAT OUT: The Binding of Isaac{':' or ' - '} AFTERBIRTH+ - Northernlion Plays - Episode {####} [{Flavor Text}]
 """
 
